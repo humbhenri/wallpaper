@@ -14,7 +14,8 @@
 
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
-# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+# 02110-1301, USA.
 
 from BeautifulSoup import BeautifulSoup
 import os
@@ -35,7 +36,8 @@ END"""
 
 
 def convert_to_hfs(path):
-    hfs_path = subprocess.check_output(['/usr/bin/osascript', '-e', 'return posix file "%s"' % path])
+    hfs_path = subprocess.check_output(
+        ['/usr/bin/osascript', '-e', 'return posix file "%s"' % path])
     return hfs_path.replace('file', '').strip()
 
 
@@ -51,7 +53,8 @@ def convert_to_bmp(path_to_image):
 def set_wallpaper(path_to_image):
     system = platform.system()
     if system == 'Darwin':
-        subprocess.Popen(MAC_SCRIPT % convert_to_hfs(path_to_image), shell=True)
+        subprocess.Popen(MAC_SCRIPT %
+                         convert_to_hfs(path_to_image), shell=True)
         time.sleep(10)  # launchd requires that the job runs for at least 10s
     elif system == 'Windows':
         from ctypes import windll
